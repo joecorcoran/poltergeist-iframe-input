@@ -41,7 +41,7 @@ cucumber features/posts/creating_a_post.feature:12 # Scenario: Creating a new po
 0m4.584s
 ```
 
-[Step definitions:](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb).
+[Step definitions:](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb)
 
 ```ruby
 Given /^I am on the posts index$/ do
