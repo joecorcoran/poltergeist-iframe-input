@@ -61,8 +61,7 @@ require 'capybara/poltergeist'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
-    # set to true to see what poltergeist is up to
-    :debug => true
+    :debug => false
   })
 end
 
