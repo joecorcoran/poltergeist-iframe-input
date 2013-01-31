@@ -41,7 +41,35 @@ cucumber features/posts/creating_a_post.feature:12 # Scenario: Creating a new po
 0m4.584s
 ```
 
-[See step definitions here](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb).
+[Step definitions:](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb).
+
+```ruby
+Given /^I am on the posts index$/ do
+  visit(posts_path)
+end
+
+When /^I follow "(.+)"$/ do |text|
+  click_link(text)
+end
+
+When /^I write a post in the lightbox$/ do
+  within_frame(find('.lightbox iframe')[:name]) do
+    fill_in 'post_title', :with => 'My post'
+    fill_in 'post_body', :with => 'Great post body'
+    click_button 'Create Post'
+  end
+end
+
+When /^I write a post$/ do
+  fill_in 'post_title', :with => 'My post'
+  fill_in 'post_body', :with => 'Great post body'
+  click_button 'Create Post'
+end
+
+Then /^a post should have been saved$/ do
+  assert_equal 1, Post.count
+end
+```
 
 When I turn debug on, I can see phantomjs entering the iframe and filling in the form...
 
