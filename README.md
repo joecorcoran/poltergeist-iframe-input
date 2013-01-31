@@ -2,6 +2,8 @@
 
 Trying to work out why the form inside the iframe is not being submitted.
 
+(Requires PhantomJS v1.8.1)
+
 ```
 $ bundle
 $ rake cucumber
