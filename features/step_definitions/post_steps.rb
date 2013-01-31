@@ -16,8 +16,9 @@ end
 
 When /^I write a post in the lightbox using jQuery$/ do
   within_frame(find('.lightbox iframe')[:name]) do
-    page.execute_script("$('#post_title').val('My post')")
-    page.execute_script("$('#post_body').val('Great post body')")
+    page.execute_script("$('#post_title').val('My post');")
+    page.execute_script("$('#post_body').val('Great post body');")
+    page.execute_script("$('#submit_post').click();")
     click_button 'Create Post'
   end
 end
