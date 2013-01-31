@@ -41,6 +41,8 @@ cucumber features/posts/creating_a_post.feature:12 # Scenario: Creating a new po
 0m4.584s
 ```
 
+[See step definitions here](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb).
+
 When I turn debug on, I can see phantomjs entering the iframe and filling in the form...
 
 ```
