@@ -19,26 +19,33 @@ Feature: As some guy
   Scenario: Creating a new post without the lightbox # features/posts/creating_a_post.feature:5
     Given I am on the posts index                    # features/step_definitions/post_steps.rb:1
     When I follow "Write a post"                     # features/step_definitions/post_steps.rb:5
-    And I write a post                               # features/step_definitions/post_steps.rb:17
-    Then a post should have been saved               # features/step_definitions/post_steps.rb:23
+    And I write a post                               # features/step_definitions/post_steps.rb:26
+    Then a post should have been saved               # features/step_definitions/post_steps.rb:32
 
   @javascript
-  Scenario: Creating a new post in a lightbox # features/posts/creating_a_post.feature:12
+  Scenario: Creating a new post in a lightbox, using jQuery # features/posts/creating_a_post.feature:12
+    Given I am on the posts index                           # features/step_definitions/post_steps.rb:1
+    When I follow "Write a post"                            # features/step_definitions/post_steps.rb:5
+    And I write a post in the lightbox using jQuery         # features/step_definitions/post_steps.rb:17
+    Then a post should have been saved                      # features/step_definitions/post_steps.rb:32
+
+  @javascript
+  Scenario: Creating a new post in a lightbox # features/posts/creating_a_post.feature:19
     Given I am on the posts index             # features/step_definitions/post_steps.rb:1
     When I follow "Write a post"              # features/step_definitions/post_steps.rb:5
     And I write a post in the lightbox        # features/step_definitions/post_steps.rb:9
-    Then a post should have been saved        # features/step_definitions/post_steps.rb:23
+    Then a post should have been saved        # features/step_definitions/post_steps.rb:32
       <1> expected but was
       <0>. (MiniTest::Assertion)
-      ./features/step_definitions/post_steps.rb:24:in `/^a post should have been saved$/'
-      features/posts/creating_a_post.feature:16:in `Then a post should have been saved'
+      ./features/step_definitions/post_steps.rb:33:in `/^a post should have been saved$/'
+      features/posts/creating_a_post.feature:23:in `Then a post should have been saved'
 
 Failing Scenarios:
-cucumber features/posts/creating_a_post.feature:12 # Scenario: Creating a new post in a lightbox
+cucumber features/posts/creating_a_post.feature:19 # Scenario: Creating a new post in a lightbox
 
-2 scenarios (1 failed, 1 passed)
-8 steps (1 failed, 7 passed)
-0m4.584s
+3 scenarios (1 failed, 2 passed)
+12 steps (1 failed, 11 passed)
+0m5.006s
 ```
 
 [Step definitions:](https://github.com/joecorcoran/poltergeist-iframe-input/blob/master/features/step_definitions/post_steps.rb)
@@ -60,6 +67,15 @@ When /^I write a post in the lightbox$/ do
   end
 end
 
+When /^I write a post in the lightbox using jQuery$/ do
+  within_frame(find('.lightbox iframe')[:name]) do
+    page.execute_script("$('#post_title').val('My post');")
+    page.execute_script("$('#post_body').val('Great post body');")
+    page.execute_script("$('#submit_post').click();")
+    click_button 'Create Post'
+  end
+end
+
 When /^I write a post$/ do
   fill_in 'post_title', :with => 'My post'
   fill_in 'post_body', :with => 'Great post body'
@@ -71,7 +87,7 @@ Then /^a post should have been saved$/ do
 end
 ```
 
-When I turn debug on, I can see phantomjs entering the iframe and filling in the form...
+In the failing scenario, when I turn debug on, I can see phantomjs entering the iframe and filling in the form...
 
 ```
 {"response"=>{"page_id"=>1, "ids"=>[]}}
