@@ -14,3 +14,10 @@ Feature: As some guy
     When I follow "Write a post"
     And I write a post in the lightbox
     Then a post should have been saved
+
+  @javascript
+  Scenario: Creating a new post in a lightbox, using jQuery
+    Given I am on the posts index
+    When I follow "Write a post"
+    And I write a post in the lightbox using jQuery
+    Then a post should have been saved
