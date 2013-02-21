@@ -1,5 +1,7 @@
 # Poltergeist iframe form submission demo
 
+**Update: this issue was solved by Poltergeist 1.1.0**
+
 Trying to work out why the form inside the iframe is not being submitted.
 
 (Requires PhantomJS v1.8.1)
