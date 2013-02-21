@@ -12,6 +12,6 @@ gem 'jquery-rails'
 
 gem 'cucumber', '= 1.2.1'
 gem 'cucumber-rails', :require => false
-gem 'poltergeist', '= 1.0.2'
+gem 'poltergeist', '= 1.1.0'
 gem 'database_cleaner'
 gem 'launchy'
